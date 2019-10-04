@@ -38,38 +38,27 @@ class _ContadorPageState extends State<ContadorPage> {
 
   Widget _crearBotones() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        
+        SizedBox(width: 30),
         FloatingActionButton(
-          child: Icon(Icons.refresh),
-          onPressed: () {
-            setState(() {
-              _contador = 0;
-            });
-          },
+          child: Icon(Icons.exposure_zero),
+          onPressed: () => {},
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () {
-                setState(() {
-                  _contador++;
-                });
-              },
-            ),
-            FloatingActionButton(
-              child: Icon(Icons.remove_circle),
-              onPressed: () {
-                setState(() {
-                  _contador--;
-                });
-              },
-            )
-          ],
-        )
+        Expanded(
+          child: SizedBox(),
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.remove),
+          onPressed: () => {},
+        ),
+        SizedBox(
+          width: 5.0,
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => {},
+        ),
       ],
     );
   }
