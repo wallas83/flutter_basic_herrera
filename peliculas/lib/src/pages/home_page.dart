@@ -58,6 +58,8 @@ class HomePage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 15.0,),
+
+          
           FutureBuilder(
             future: peliculasProvider.getPopular(),
             // initialData: InitialData,
