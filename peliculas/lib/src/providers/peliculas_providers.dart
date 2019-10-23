@@ -9,11 +9,9 @@ class PeliculasProvider {
   String _language = 'es-ES';
 
   //modificaion
-  String _page = '1';
+  //String _page = '1';
 
-  Future<List<Pelicula>> getEnCines() async {
-    final url = Uri.https(_url, '3/movie/now_playing',
-        {'api_key': _apiKey, 'language': _language});
+  Future<List<Pelicula>> getRespuesta(url) async {
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
 
@@ -23,17 +21,32 @@ class PeliculasProvider {
     return peliculas.items;
   }
 
-  Future<List<Pelicula>> getPopular() async {
-    final url = Uri.https(_url, '3/movie/popular',
-        {'api_key': _apiKey, 'language': _language, 
-        'page': _page
-        });
+  Future<List<Pelicula>> getEnCines() async {
+    final url = Uri.https(_url, '3/movie/now_playing',
+        {'api_key': _apiKey, 'language': _language});
+    // final resp = await http.get(url);
+    // final decodedData = json.decode(resp.body);
 
-    final resp = await http.get(url);
-    final decodedData = json.decode(resp.body);
-    print("asdasd $decodedData");
-    final peliculasPopulares =
-        new Peliculas.fromJsonList(decodedData['results']);
-    return peliculasPopulares.items;
+    // //print(decodedData);
+    // final peliculas = new Peliculas.fromJsonList(decodedData['results']);
+    // //print(peliculas.items[0].title);
+    // return peliculas.items;
+    return await getRespuesta(url);
+  }
+
+  Future<List<Pelicula>> getPopular() async {
+    final url = Uri.https(_url, '3/movie/popular', {
+      'api_key': _apiKey, 'language': _language,
+      //'page': _page
+    });
+
+    // final resp = await http.get(url);
+    // final decodedData = json.decode(resp.body);
+    // print("asdasd $decodedData");
+    // final peliculasPopulares =
+    //     new Peliculas.fromJsonList(decodedData['results']);
+    // return peliculasPopulares.items;
+
+    return await getRespuesta(url);
   }
 }
