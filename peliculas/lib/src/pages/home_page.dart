@@ -5,8 +5,10 @@ import 'package:peliculas/src/widgets/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
   final peliculasProvider = new PeliculasProvider();
+
   @override
   Widget build(BuildContext context) {
+    peliculasProvider.getPopular();
     return Scaffold(
       appBar: AppBar(
         title: Text('Peliculas en Cines'),
@@ -57,23 +59,24 @@ class HomePage extends StatelessWidget {
               style: Theme.of(context).textTheme.subhead,
             ),
           ),
-          SizedBox(height: 15.0,),
+          SizedBox(
+            height: 15.0,
+          ),
+          StreamBuilder(
+            stream: peliculasProvider.popularesStream,
 
-          
-          FutureBuilder(
-            future: peliculasProvider.getPopular(),
             // initialData: InitialData,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              
               snapshot.data?.forEach((p) => print(p.title));
 
               if (snapshot.hasData) {
-                return MovieHorizontal(peliculas: snapshot.data,);
+                return MovieHorizontal(
+                    peliculas: snapshot.data,
+                    siguientePagina: peliculasProvider.getPopular);
               } else {
+                  return Center(child: CircularProgressIndicator());
               }
-              return 
-              Center (child: CircularProgressIndicator());
-            },
+              },
           ),
         ],
       ),
