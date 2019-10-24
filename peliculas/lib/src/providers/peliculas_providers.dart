@@ -9,6 +9,7 @@ class PeliculasProvider {
   String _url = 'api.themoviedb.org';
   String _language = 'es-ES';
   int _popularesPage = 0;
+  bool _cargando = false;
 
   List<Pelicula> _populares = new List();
 
@@ -48,26 +49,27 @@ class PeliculasProvider {
   }
 
   Future<List<Pelicula>> getPopular() async {
-    _popularesPage++;
+    
+    if (_cargando){
+        print("dentro de la funcion  $_cargando");
+        return [];
+    }
+    
+    print("en el medio de la funcion  $_cargando");
+        _cargando = true;   
+        _popularesPage++;
+   
+       
     final url = Uri.https(_url, '3/movie/popular', {
       'api_key': _apiKey,
       'language': _language,
       'page': _popularesPage.toString()
     });
-
-    // final resp = await http.get(url);
-    // final decodedData = json.decode(resp.body);
-    // print("asdasd $decodedData");
-    // final peliculasPopulares =
-    //     new Peliculas.fromJsonList(decodedData['results']);
-    // return peliculasPopulares.items;
-
-    //llamando al stream
-
     final resp = await getRespuesta(url);
     _populares.addAll(resp);
     popularesSink(_populares);
-   
+     _cargando = false;
+     // print(" al final de la funcion $_cargando");
     return resp;
   }
 }

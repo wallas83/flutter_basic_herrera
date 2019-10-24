@@ -23,7 +23,10 @@ class HomePage extends StatelessWidget {
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[_swiperTarjetas(), _footer(context)],
+          children: <Widget>[
+            _swiperTarjetas(), 
+            _footer(context)
+            ],
         ),
       ),
     );
@@ -67,7 +70,7 @@ class HomePage extends StatelessWidget {
 
             // initialData: InitialData,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              snapshot.data?.forEach((p) => print(p.title));
+            //  snapshot.data?.forEach((p) => print(p.title));
 
               if (snapshot.hasData) {
                 return MovieHorizontal(
