@@ -6,6 +6,7 @@ import 'package:peliculas/src/providers/peliculas_providers.dart';
 class PeliculaDetalle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //aca se recibe la pelicula como argumento
     final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         body: CustomScrollView(

@@ -14,11 +14,14 @@ class PeliculasProvider {
 
   List<Pelicula> _populares = new List();
 
-  final _popularesStreamController = StreamController<List<Pelicula>>.broadcast();
+  final _popularesStreamController =
+      StreamController<List<Pelicula>>.broadcast();
 
-  Function(List<Pelicula>) get popularesSink => _popularesStreamController.sink.add;
+  Function(List<Pelicula>) get popularesSink =>
+      _popularesStreamController.sink.add;
 
-  Stream<List<Pelicula>> get popularesStream => _popularesStreamController.stream;
+  Stream<List<Pelicula>> get popularesStream =>
+      _popularesStreamController.stream;
 
   void disposeStream() {
     _popularesStreamController?.close();
@@ -50,17 +53,15 @@ class PeliculasProvider {
   }
 
   Future<List<Pelicula>> getPopular() async {
-    
-    if (_cargando){
-        print("dentro de la funcion  $_cargando");
-        return [];
+    if (_cargando) {
+      print("dentro de la funcion  $_cargando");
+      return [];
     }
-    
+
     print("en el medio de la funcion  $_cargando");
-        _cargando = true;   
-        _popularesPage++;
-   
-       
+    _cargando = true;
+    _popularesPage++;
+
     final url = Uri.https(_url, '3/movie/popular', {
       'api_key': _apiKey,
       'language': _language,
@@ -69,22 +70,25 @@ class PeliculasProvider {
     final resp = await getRespuesta(url);
     _populares.addAll(resp);
     popularesSink(_populares);
-     _cargando = false;
-     // print(" al final de la funcion $_cargando");
+    _cargando = false;
+    // print(" al final de la funcion $_cargando");
     return resp;
   }
 
   Future<List<Actor>> getCast(String peliId) async {
+    final url = Uri.https(_url, '3/movie/$peliId/credits',
+        {'api_key': _apiKey, 'language': _language});
 
-      final url = Uri.https(_url, '3/movie/$peliId/credits', {
-        'api_key'   : _apiKey,
-        'language'  : _language
-      });
+    final resp = await http.get(url);
+    final decodedData = json.decode(resp.body);
+    final cast = new Cast.fromJsonList(decodedData['cast']);
 
-      final resp = await http.get(url);
-      final decodedData = json.decode(resp.body);
-      final cast = new Cast.fromJsonList(decodedData['cast']);
+    return cast.actores;
+  }
 
-      return cast.actores;
-  } 
+  Future<List<Pelicula>> buscarPelicula(String query) async {
+    final url = Uri.https(_url, '3/search/movie/',
+        {'api_key': _apiKey, 'language': _language, 'query': query});
+    return await getRespuesta(url);
+  }
 }
