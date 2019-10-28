@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             _swiperTarjetas(), 
             _footer(context)
+            
             ],
         ),
       ),
