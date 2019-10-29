@@ -44,7 +44,7 @@ class DataSearch extends SearchDelegate {
       },
     );
   }
-
+  // se usara builresults para que luego del resultados pueda volver a la busqueda anterior
   @override
   Widget buildResults(BuildContext context) {
     //crea los resulatados que vamos a mostrar
