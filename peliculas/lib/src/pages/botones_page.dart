@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui' ;
 
 import 'package:flutter/material.dart';
 
@@ -6,19 +7,18 @@ class BotonesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _fondoApp(),
-          SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                _titulos()
-              ],
-            ),
-          )
+        body: Stack(
+          children: <Widget>[
+            _fondoApp(),
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[_titulos(),
+                _botonesRedondeados()],
+              ),
+            )
           ],
-      ),
-    );
+        ),
+        bottomNavigationBar: _botomNavigatorBar(context));
   }
 
   Widget _fondoApp() {
@@ -53,19 +53,127 @@ class BotonesPage extends StatelessWidget {
   }
 
   Widget _titulos() {
-    final color = TextStyle(color: Colors.white,fontSize: 36.0,fontWeight: FontWeight.bold );
+    //final color = TextStyle(color: Colors.white,fontSize: 36.0,fontWeight: FontWeight.bold );
     return SafeArea(
-          child: Container(
-            padding: EdgeInsets.all(20.0),
+      child: Container(
+        padding: EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Clasify transaction',style: TextStyle(color: Colors.white,fontSize: 30.0,fontWeight: FontWeight.bold ),),
-            SizedBox(height: 10.0,),
-            Text('Clasify this transaction into a particular Category', style: TextStyle(color: Colors.white,fontSize: 18.0,),)
+            Text(
+              'Clasify transaction',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              'Clasify this transaction into a particular Category',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+            )
           ],
         ),
       ),
     );
   }
+
+ 
+ 
+ Widget _botomNavigatorBar(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+          canvasColor: Color.fromRGBO(55, 57, 87, 1.0),
+          primaryColor: Colors.pinkAccent,
+          textTheme: Theme.of(context).textTheme.copyWith(caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))
+          ),
+      child: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.calendar_today,
+                size: 30.0,
+              ),
+              title: Container()),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.bubble_chart,
+                size: 30.0,
+              ),
+              title: Container()),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.supervised_user_circle,
+                size: 30.0,
+              ),
+              title: Container())
+        ],
+      )
+      );
+    
+  }
+Widget _botonesRedondeados(){
+  return Table(
+    children: [
+      TableRow(
+        children: [
+          _crearBotonRedondeado(Colors.blue,Icons.border_all,'general'),
+          _crearBotonRedondeado(Colors.amber,Icons.access_alarm,'alarma')
+        ]
+      ),
+      TableRow(
+        children: [
+          _crearBotonRedondeado(Colors.orange,Icons.business,'Negocios'),
+          _crearBotonRedondeado(Colors.cyanAccent,Icons.airline_seat_flat_angled,'airline')
+        ]
+      ),
+      TableRow(
+        children: [
+          _crearBotonRedondeado(Colors.greenAccent,Icons.web,'Web'),
+          _crearBotonRedondeado(Colors.purpleAccent,Icons.camera,'camera')
+        ]
+      ),
+      TableRow(
+        children: [
+          _crearBotonRedondeado(Colors.indigo,Icons.dashboard,'Dashboard'),
+          _crearBotonRedondeado(Colors.redAccent,Icons.help,'Help')
+        ]
+      ),
+    
+    ],
+  );
+}
+Widget _crearBotonRedondeado(Color color, IconData icono, String texto){
+  return ClipRect(
+      child: BackdropFilter(
+        filter:ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+        child: Container(
+        height: 180.0,
+        margin: EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(62, 66, 107, 0.7),
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SizedBox(height: 5.0,),        
+            CircleAvatar(
+              backgroundColor: color,
+              radius: 35.0,
+              child: Icon(icono,color:Colors.white, size: 30.0,),
+            ),
+            Text(texto, style: TextStyle(color: color),),
+            SizedBox(height: 5.0,)
+          ],
+        ),
+      ),
+    ),
+  );
+}
 }
