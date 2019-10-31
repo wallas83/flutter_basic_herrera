@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
        //'mapa'      : (BuildContext context) => MapasPage(),
        //'direccion' :  (BuildContext context) => DireccionPage()
      },
+     theme: ThemeData(
+       primaryColor: Colors.redAccent
+     ),
     );
   }
 }
