@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:qr_reader/src/model/scan_model.dart';
 import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/mapas_page.dart';
 import 'package:qr_reader/src/pages/scans_bloc.dart';
+import 'package:qr_reader/src/utils/utils.dart' as utils;
 import 'package:qrcode_reader/qrcode_reader.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,12 +66,12 @@ class _HomePageState extends State<HomePage> {
   Widget _crearFloatingButtom() {
     return FloatingActionButton(
       child: Icon(Icons.filter_center_focus),
-      onPressed: _scanQR,
+      onPressed: () => _scanQR(context),
       backgroundColor: Theme.of(context).primaryColor,
     );
   }
 
-  _scanQR() async {
+  _scanQR(BuildContext context) async {
     //https://www.google.com/
     //geo:-16.502047, -68.1313,500
     String futureString = 'https://www.google.com/';
@@ -82,8 +85,18 @@ class _HomePageState extends State<HomePage> {
 
     if (futureString != null) {
       final scan = ScanModel(valor: futureString);
-        scansBloc.agregarScan(scan);
-       }
-    
+      scansBloc.agregarScan(scan);
+
+       final scan2 = ScanModel(valor:'geo:-16.502047,-68.1313,500');
+       scansBloc.agregarScan(scan2);
+
+      if (Platform.isIOS) {
+        Future.delayed(Duration(milliseconds: 750), () {
+          utils.abrirScan(context,scan);
+        });
+      } else {
+        utils.abrirScan(context,scan);
+      }
+    }
   }
 }

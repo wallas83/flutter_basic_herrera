@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/home_page.dart';
-import 'package:qr_reader/src/pages/mapas_page.dart';
+import 'package:qr_reader/src/pages/mapa_page.dart';
  
 void main() => runApp(MyApp());
  
@@ -15,8 +14,7 @@ class MyApp extends StatelessWidget {
 
      routes: {
        'home'      : (BuildContext context) => HomePage(),
-       //'mapa'      : (BuildContext context) => MapasPage(),
-       //'direccion' :  (BuildContext context) => DireccionPage()
+       'mapa'      : (BuildContext context) => MapaPage(),
      },
      theme: ThemeData(
        primaryColor: Colors.redAccent

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:qr_reader/src/model/scan_model.dart';
 import 'package:qr_reader/src/pages/scans_bloc.dart';
+import 'package:qr_reader/src/utils/utils.dart'as utils;
 
 class MapasPage extends StatelessWidget {
   final scansBloc = new ScansBloc();
   @override
   Widget build(BuildContext context) {
+
     return StreamBuilder<List<ScanModel>>(
       stream: scansBloc.scansStream,
 
@@ -43,7 +45,9 @@ class MapasPage extends StatelessWidget {
                     trailing: Icon(
                       Icons.keyboard_arrow_right,
                       color: Colors.grey,
+                      
                     ),
+                    onTap: () => utils.abrirScan(context,scans[index]),
                   ),
                 ));
             
