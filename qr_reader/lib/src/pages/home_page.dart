@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:qr_reader/src/block/scans_bloc.dart';
 import 'package:qr_reader/src/model/scan_model.dart';
 import 'package:qr_reader/src/pages/direcciones_page.dart';
 import 'package:qr_reader/src/pages/mapas_page.dart';
-import 'package:qr_reader/src/pages/scans_bloc.dart';
+
 import 'package:qr_reader/src/utils/utils.dart' as utils;
 import 'package:qrcode_reader/qrcode_reader.dart';
 
@@ -74,21 +75,21 @@ class _HomePageState extends State<HomePage> {
   _scanQR(BuildContext context) async {
     //https://www.google.com/
     //geo:-16.502047, -68.1313,500
-    String futureString = 'https://www.google.com/';
+    String futureString ;
 
-    //  try {
-    //     futureString = await new QRCodeReader().scan();
-    //  } catch (e) {
-    //       futureString = e.toString();
-    //  }
-    // print(' futureString $futureString');
+     try {
+        futureString = await new QRCodeReader().scan();
+     } catch (e) {
+          futureString = e.toString();
+     }
+    print(' futureString $futureString');
 
     if (futureString != null) {
       final scan = ScanModel(valor: futureString);
       scansBloc.agregarScan(scan);
 
-       final scan2 = ScanModel(valor:'geo:-16.502047,-68.1313,500');
-       scansBloc.agregarScan(scan2);
+      //  final scan2 = ScanModel(valor:'geo:-16.502047,-68.1313,500');
+      //  scansBloc.agregarScan(scan2);
 
       if (Platform.isIOS) {
         Future.delayed(Duration(milliseconds: 750), () {
