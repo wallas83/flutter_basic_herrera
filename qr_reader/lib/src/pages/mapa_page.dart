@@ -46,7 +46,7 @@ class _MapaPageState extends State<MapaPage> {
             '{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}',
         additionalOptions: {
           'accessToken':
-              'pk.eyJ1Ijoid2FsbGFzODMiLCJhIjoiY2syaDY1NnN6MTJscTNibzAweHF1Mzl5dCJ9.X8iIOMl7LW7eYtzlTJ_ouw',
+              'agregarToken',
           'id': 'mapbox.$tipoMap' //streets, dark, light, outdoors,satellite
         });
   }
