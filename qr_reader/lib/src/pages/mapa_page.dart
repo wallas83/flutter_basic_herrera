@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:qr_reader/src/model/scan_model.dart';
 
-
+//agregar token del mapa en accesToken
 class MapaPage extends StatefulWidget {
   @override
   _MapaPageState createState() => _MapaPageState();
