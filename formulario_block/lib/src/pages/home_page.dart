@@ -14,19 +14,19 @@ class HomePage extends StatelessWidget {
             onPressed: () {},
           )
         ],
+        centerTitle: true,
         title: Text('Home')
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text('email : ${bloc.email}'),
-            Divider(),
-            Text('password ${bloc.password}')
-          ],
-        ),
-      ),
+      body: Container(),
+      floatingActionButton: _crearBoton(context),
+    );
+  }
+
+  _crearBoton(BuildContext context) {
+    return FloatingActionButton(
+      child: Icon(Icons.adb),
+      backgroundColor: Colors.deepPurple,
+      onPressed:  () => Navigator.pushNamed(context, 'producto'),
     );
   }
 }
