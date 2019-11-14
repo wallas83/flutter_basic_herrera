@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formulario_block/src/models/producto_model.dart';
+import 'package:formulario_block/src/providers/productos_provider.dart';
 import 'package:formulario_block/src/utils/utils.dart' as utils;
 class ProductPage extends StatefulWidget {
 
@@ -10,7 +11,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final formkey = GlobalKey<FormState>();
   ProductModel producto = new ProductModel();
-
+  final productoProvider = new ProductosProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +107,11 @@ class _ProductPageState extends State<ProductPage> {
 
     formkey.currentState.save();
     print('ok');
-      
+    print(producto.titulo);
+    print(producto.valor);
+    print(producto.disponible);
+    
+      productoProvider.crearProducto(producto);
   }
 
  Widget  _crearDisponible() {
