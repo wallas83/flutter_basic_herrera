@@ -14,7 +14,7 @@ class UsuarioProvider {
     final authData = {
       'email'    : email,
       'password' : password,
-      'returnSecureToken' : true
+      'returnSecureToken' :  true
     };
 
     final resp = await http.post(

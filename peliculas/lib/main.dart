@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:peliculas/src/pages/botones_page.dart';
 import 'package:peliculas/src/pages/home_page.dart';
 import 'package:peliculas/src/pages/pelicula_detalle.dart';
 
@@ -19,12 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
           title: 'Peliculas',
-          initialRoute: 'botones',
+          initialRoute: '/',
           routes: {
             '/'       : (BuildContext context) => HomePage(),
             'detalle' : (BuildContext context) => PeliculaDetalle(),
-            'botones' : (BuildContext context) => BotonesPage()
-            
           },
     );
   }
